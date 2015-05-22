@@ -1,0 +1,17 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "parser": "babel-eslint",
+  "rules": {
+    "quotes": [2, "single"],
+    "strict": [2, "never"],
+    "curly": false,
+    "no-underscore-dangle": false
+  }
+}
