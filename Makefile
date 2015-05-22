@@ -29,7 +29,4 @@ test-dist:
 	@echo "\nTesting build files, almost there..!"
 	@$(BIN)/mocha $(MOCHA_ARGS)
 
-example:
-	@node ./example/server.js
-
-.PHONY: install test test-dist test-watch example
+.PHONY: install test test-dist test-watch
