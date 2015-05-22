@@ -1,22 +1,14 @@
 {
   "name": "stil",
   "version": "0.0.0",
-  "description": "css in javascript made simple.",
-  "main": "index.js",
+  "description": "Encapsulated styling for your javascript components with all the power of javascript and CSS combined.",
+  "main": "dist",
   "scripts": {
     "test": "make test"
   },
   "keywords": [
-    "sleek",
-    "stil",
-    "still",
-    "stilet",
-    "style",
-    "simple",
-    "styling",
-    "css",
-    "react",
-    "inline"
+    "sleek", "stil", "still", "stilet", "style", "simple",
+    "styling", "css", "react", "inline", "component", "encapsulation"
   ],
   "author": "Chris Kjær Sørensen",
   "license": "MIT",
@@ -34,5 +26,6 @@
     "react-hot-loader": "^1.2.7",
     "webpack": "^1.9.4",
     "webpack-dev-server": "^1.8.2"
-  }
+  },
+  "repository": "chriskjaer/stil"
 }
