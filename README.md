@@ -1,5 +1,5 @@
 #Stil
->__ Danish-English: _stil » style__ __
+> Danish-English: _stil » style_
 
 Encapsulated styling for your javascript components with all the power of
 javascript and CSS combined.
