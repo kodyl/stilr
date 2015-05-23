@@ -1,0 +1,5 @@
+src/__tests__
+lib/__tests__
+dist/__tests__
+example
+.tern*
