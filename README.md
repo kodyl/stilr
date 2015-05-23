@@ -38,7 +38,7 @@ console.log(styles.container);  // => '_xsrhhm'
 ```
 
 #### `string StyleSheet.render()`
-Stilr outputs the contents of it's internal stylesheet as a string of css
+Stilr outputs the contents of its internal stylesheet as a string of css
 
 __Example__
 ```javascript
@@ -119,7 +119,7 @@ and return an object with the same keys mapped to those classes.
 Note that you're able to use pseudo selectors and media queries.
 Pseudo selectors are written like you normally would in CSS, e.g.: `:hover`, `:active`,
 `:before` etc.
-Media queries are the same, e.g. `palm` is just a string: `@media screen and (max-width:600px)`. Any valid media query is allowed.
+Media queries are the same, e.g. `palm` in the example is just a string: `@media screen and (max-width:600px)`. Any valid media query is allowed.
 
 Since we just have a bunch of class names now, we can use these in our React
 Component.
