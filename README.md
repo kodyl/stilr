@@ -3,8 +3,12 @@
 Encapsulated styling for your javascript components with all the power of
 javascript and CSS combined.
 
-...oh, and did I mention you get duplicate style elimination for free?
+- Unique class names
+- Useable on the server
+- Allows nested pseudo selectors
+- Allows nested media queries
 
+...oh, and did I mention you get duplicate style elimination for free?
 
 ## API
 
