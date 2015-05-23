@@ -1,5 +1,4 @@
-#Stil
-> Danish-English: _stil » style_
+#Stilr
 
 Encapsulated styling for your javascript components with all the power of
 javascript and CSS combined.
@@ -7,15 +6,222 @@ javascript and CSS combined.
 ...oh, and did I mention you get duplicate style elimination for free?
 
 
-Stay tuned while I update the readme with examples and use cases.
+## API
+
+#### `object StyleSheet.create(object spec)`
+Stilr extracts the styles from the style object and returns and object with the
+same keys mapped to class names.
+
+__Example__
+```javascript
+import StyleSheet from 'stilr';
+
+const palm = '@media screen and (max-width:600px)';
+
+const styles = StyleSheet.create({
+  container: {
+    color: '#fff',
+    :'hover': {                 // Pseudo Selectors are allowed
+      color: '#000'
+    },
+    [palm]: {                   // Media Queries are allowed
+      fontSize: 16
+    }
+  }
+});
+
+console.log(styles.container);  // => '_xsrhhm'
+```
+
+#### `string StyleSheet.render()`
+Stilr outputs the contents of it's internal stylesheet as a string of css
+
+__Example__
+```javascript
+import StyleSheet from 'stilr';
+
+StyleSheet.create({
+  container: {
+    color: '#fff'
+  }
+});
+
+const CSS = StyleSheet.render();
+
+console.log(CSS);             // => '._yiw79c{color:#fff;}'
+```
+
+#### `bool StyleSheet.clear()`
+Clear Stilr internal stylesheet
+
+__Example__
+```javascript
+import StyleSheet from 'stilr';
+
+const styles = StyleSheet.create({
+  container: {
+    color: '#fff'
+  }
+});
+
+StyleSheet.clear();
+
+const CSS = StyleSheet.render();
+
+console.log(CSS);             // => ''
+```
+
+
+## Examples
+
+#### Basic Button Component Example.
+Let's start of by creating our styles. If you have ever used React Native, this
+will be familiar to you:
+
+```javascript
+import StyleSheet from 'stilr';
+import { palm } from './breakpoints';
+import { color, font } from './theme';
+
+const styles = StyleSheet.create({
+  base: {
+    transition: 'background-color .25s',
+    borderRadius: 2,
+    textAlign: 'center',
+    fontSize: 20,
+    padding: 6,
+    color: '#fff',
+    border: `${ color.border } 1px solid`,
+    [palm]: {
+      fontSize: 18
+    }
+  },
+  primary: {
+    backgroundColor: color.primary,
+    ':hover': {
+      color: 'tomato'
+    }
+  },
+  secondary: {
+    backgroundColor: 'tomato',
+    color: '#eee'
+  }
+});
+```
+
+Stilr will now generate a set of class names based on the content of your styles
+and return an object with the same keys mapped to those classes.
+
+Note that you're able to use pseudo selectors and media queries.
+Pseudo selectors are written like you normally would in CSS, e.g.: `:hover`, `:active`,
+`:before` etc.
+Media queries are the same, e.g. `palm` is just a string: `@media screen and (max-width:600px)`. Any valid media query is allowed.
+
+Since we just have a bunch of class names now, we can use these in our React
+Component.
+
+```javascript
+import React, { PropTypes } from 'react';
+
+class Button extends React.Component {
+  static propTypes = {
+    type: PropTypes.oneOf(['primary', 'secondary'])
+  }
+
+  render() {
+    const { type, children } = this.props;
+    const classNames = [
+      styles.base,
+      styles[ type ]
+    ];
+
+    return (
+      <button className={ classNames }>
+        { children }
+      </button>
+    );
+}
+```
+
+Next up, let's render our css and mount our app:
+
+```javascript
+import React from 'react';
+import Button from './button';
+import StyleSheet from 'stilr';
+
+React.render(
+  <Button type='primary' />,
+  document.getElementById('root')
+);
+
+document.getElementById('stylesheet').textContent = StyleSheet.render();
+```
+
+This step could also have been done on the server. Since StyleSheet.render just
+returns a string of css. In our case, it would look something like this in a
+prettified version:
+```css
+@media screen and (max-width:600px) {
+  ._82uwp6 {
+    font-size: 18px;
+  }
+}
+
+._82uwp6 {
+  transition: background-color .25s;
+  border-radius: 2px;
+  text-align: center;
+  font-size: 20px;
+  padding: 6px;
+  color: #fff;
+  border: #fff 1px solid;
+}
+
+._11jt6vs:hover {
+  color: tomato;
+}
+
+._11jt6vs {
+  background-color: red;
+}
+
+._1f4wq27 {
+  background-color: tomato;
+  color: #eee;
+}
+```
+
+In case you were wondering: Yes, this would would be ideal place to add something like autoprefixer, minification etc.
+
+
+## Duplicate Style Elimation
+```javascript
+import StyleSheet from 'stilr';
+
+const styles = StyleSheet.create({
+  same: {
+    fontSize: 18,
+    color: '#000'
+  },
+  sameSame: {
+    fontSize: 18,
+    color: '#000'
+  }
+});
+
+console.log( styles.same );        => '_1v3qejj'
+console.log( styles.sameSame );    => '_1v3qejj'
+```
+
+...magic.
+
+Under the hood, stilr creates classes based on a hash of your style object
+which means that when the content is the same, the same hash will always be
+returned.
 
 
 ## TODO:
-- [ ] Document API.
-- [ ] Remove React as a dependency.
-
-- Add how-to use with:
-  - [ ] React.
-  - [ ] Server side rendering.
-  - [ ] autoprefixer.
-  - ...more ?
+- [ ] Removed React as a dependency
+- [ ] Flesh out documentation
+- [ ] More examples
