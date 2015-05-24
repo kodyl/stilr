@@ -13,7 +13,7 @@ javascript and CSS combined.
 ## API
 
 #### `object StyleSheet.create(object spec)`
-Stilr extracts the styles from the style object and returns and object with the
+Stilr extracts the styles from the style object and returns an object with the
 same keys mapped to class names.
 
 __Example__
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   }
 });
 
-console.log(styles.container);  // => '_xsrhhm'
+console.log(styles.container);  // => '_xsrhhm' -- (The class name for this style.)
 ```
 
 #### `string StyleSheet.render()`
@@ -220,7 +220,7 @@ console.log( styles.sameSame );    => '_1v3qejj'
 
 ...magic.
 
-Under the hood, stilr creates a class names based on a content hash of your style object
+Under the hood, stilr creates class names based on a content hash of your style object
 which means that when the content is the same, the same hash will always be
 returned. 
 
