@@ -1,4 +1,4 @@
-#Stilr
+# Stilr [![Build Status](https://travis-ci.org/chriskjaer/stilr.svg)](https://travis-ci.org/chriskjaer/stilr) [![npm version](https://badge.fury.io/js/stilr.svg)](http://badge.fury.io/js/stilr)
 
 Encapsulated styling for your javascript components with all the power of
 javascript and CSS combined.
