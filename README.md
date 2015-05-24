@@ -25,7 +25,7 @@ const palm = '@media screen and (max-width:600px)';
 const styles = StyleSheet.create({
   container: {
     color: '#fff',
-    :'hover': {                 // Pseudo Selectors are allowed
+    ':hover': {                 // Pseudo Selectors are allowed
       color: '#000'
     },
     [palm]: {                   // Media Queries are allowed
@@ -196,7 +196,7 @@ prettified version:
 }
 ```
 
-In case you were wondering: Yes, this would would be ideal place to add something like autoprefixer, minification etc.
+In case you were wondering: Yes, this would would be an ideal place to add something like autoprefixer, minification etc.
 
 
 ## Duplicate Style Elimation
@@ -220,9 +220,9 @@ console.log( styles.sameSame );    => '_1v3qejj'
 
 ...magic.
 
-Under the hood, stilr creates classes based on a hash of your style object
+Under the hood, stilr creates a class names based on a content hash of your style object
 which means that when the content is the same, the same hash will always be
-returned.
+returned. 
 
 
 ## TODO:
