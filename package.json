@@ -1,14 +1,25 @@
 {
   "name": "stilr",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Encapsulated styling for your javascript components with all the power of javascript and CSS combined. Usefull with React",
   "main": "dist",
   "scripts": {
     "test": "make test"
   },
   "keywords": [
-    "sleek", "stil", "still", "stilet", "style", "simple", "stilr",
-    "styling", "css", "react", "inline", "component", "encapsulation",
+    "sleek",
+    "stil",
+    "still",
+    "stilet",
+    "style",
+    "simple",
+    "stilr",
+    "styling",
+    "css",
+    "react",
+    "inline",
+    "component",
+    "encapsulation",
     "react-component"
   ],
   "author": "Chris Kjær Sørensen",
