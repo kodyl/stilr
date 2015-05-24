@@ -134,13 +134,13 @@ class Button extends React.Component {
 
   render() {
     const { type, children } = this.props;
-    const classNames = [
+    const buttonStyles = [
       styles.base,
       styles[ type ]
-    ];
+    ].join(' ');
 
     return (
-      <button className={ classNames }>
+      <button className={ buttonStyles }>
         { children }
       </button>
     );
