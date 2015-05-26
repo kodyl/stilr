@@ -10,6 +10,12 @@
 
 _Note: Gaps between patch versions are faulty/broken releases._
 
+## 0.2.2
+  * Bug Fix
+    * Media queries are now inserted after parent entry. Thanks @MicheleBertoli
+      !
+    * New entries in existing media queries don't overwrite existing entries
+
 ## 0.2.0
 
  * **Internal**
