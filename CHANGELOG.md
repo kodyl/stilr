@@ -10,6 +10,11 @@
 
 _Note: Gaps between patch versions are faulty/broken releases._
 
+## 0.2.0
+
+ * **Internal**
+  * Implemented extentedToString, now we have even shorter class names!
+
 ## 0.1.0
 
  * **Internal**
