@@ -10,6 +10,13 @@
 
 _Note: Gaps between patch versions are faulty/broken releases._
 
+## 0.2.2
+
+ * **Bug Fix**
+  * Media queries are now inserted after normal entries. Thanks @MicheleBertoli !
+  * New media query entries are now inserted correctly in existing media query
+    entries
+
 ## 0.2.0
 
  * **Internal**
