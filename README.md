@@ -297,6 +297,6 @@ Remember to replace `./your-app.js` with the entry file of your app.
 Not implemented yet. Contributions are welcome!
 
 ## TODO:
-- [ ] Removed React as a dependency
+- [ ] Remove React as a dependency
 - [ ] More examples
 
