@@ -231,7 +231,7 @@ returned.
 #### Server
 If you do serverside rendering, you should be able to extract your styles right after you load your app.
 
-```
+```javascript
 import React from 'react';
 import StyleSheet from 'stilr';
 import App from '../your-app.js';
