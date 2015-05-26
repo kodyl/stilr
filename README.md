@@ -226,7 +226,34 @@ which means that when the content is the same, the same hash will always be
 returned. 
 
 
+## Extracting your styles.
+
+#### Server
+If you do serverside rendering, you should be able to extract your styles right after you load your app.
+
+```
+import React from 'react';
+import StyleSheet from 'stilr';
+import App from '../your-app.js';
+
+const css = StyleSheet.render();
+const html = React.renderToStaticMarkup(<App />);
+
+// Extract css to a file or insert it in a file at the top of your html document
+```
+Apply autoprefixer here, or other preprocess goodness here. 
+If you're really fancy, you only do the required autoprefixes based on the user agent.
+
+#### Makefile
+```Makefile
+extract-styles:
+	@node -p "var s = require('stilr'); require('./your-app.js'); s.render()" >> ./build/styles.css
+```
+
+#### Webpack
+Not implemented yet. Contributions are welcome!
+
 ## TODO:
 - [ ] Removed React as a dependency
-- [ ] Flesh out documentation
 - [ ] More examples
+
