@@ -7,6 +7,7 @@ javascript and CSS combined.
 - Useable on the server
 - Allows nested pseudo selectors
 - Allows nested media queries
+- No namespacing / Class name collisions.
 
 ...oh, and did I mention you get duplicate style elimination for free?
 
