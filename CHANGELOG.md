@@ -10,6 +10,11 @@
 
 _Note: Gaps between patch versions are faulty/broken releases._
 
+## 0.3.0
+  * Internal
+    * Media queries are now inserted after normal CSS
+    * Null and empty classes are now removed from rendered CSS
+
 ## 0.2.2
   * Bug Fix
     * Media queries are now inserted after parent entry. Thanks @MicheleBertoli
