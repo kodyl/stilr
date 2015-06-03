@@ -244,16 +244,59 @@ const html = React.renderToStaticMarkup(<App />);
 Apply autoprefixer here, or other preprocess goodness here. 
 If you're really fancy, you only do the required autoprefixes based on the user agent.
 
-#### Makefile
-```Makefile
-extract-styles:
-	@node -p "var s = require('stilr'); require('./your-app.js'); s.render()" >> ./build/styles.css
+### Development
+When working with Stilr in development, the preferred way to extract styles would be the following way, just before you initialize your app.
+
+```javascript
+import App from '../app';
+import React from 'react';
+import StyleSheet from 'stilr';
+
+let stylesheet = document.createElement('style');
+stylesheet.textContent = StyleSheet.render();
+document.head.appendChild(stylesheet);
+
+React.render(<App />, document.getElementById('root'));
 ```
 
-#### Webpack
+### Development React Hot Loader
+If you're using [React Hot Loader](https://github.com/gaearon/react-hot-loader). Use the following approach in development to get hot loading styles.
+
+```javascript
+import React from 'react';
+import StyleSheet from 'stilr';
+
+class App extends React.Component {
+   render() {
+     if (process.env !== 'production') {
+       // Make sure you have a style element with the ID: 'stylesheet' in your html.
+       document.getElementById('stylesheet').textContent = StyleSheet.render()
+     }
+     
+     return (
+        ...snip...
+     );
+   }
+}
+```
+
+#### Production
+
+##### Makefile
+Add this as a build step in your makefile.
+```Makefile
+extract-styles:
+	@node -p "require('babel/register')({ignore: false}); var s = require('stilr'); require('./your-app.js'); s.render()" > ./bundle.css
+```
+
+The following snippet can also be executed anywhere to extract the styles.
+Remember to replace `./your-app.js` with the entry file of your app.
+`node -p "require('babel/register')({ignore: false}); var s = require('stilr'); require('./your-app.js')`
+
+##### Webpack
 Not implemented yet. Contributions are welcome!
 
 ## TODO:
-- [ ] Removed React as a dependency
+- [ ] Remove React as a dependency
 - [ ] More examples
 
