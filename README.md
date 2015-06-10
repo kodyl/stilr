@@ -3,11 +3,12 @@
 Encapsulated styling for your javascript components with all the power of
 javascript and CSS combined.
 
-- Unique class names
+- Unique class names (Content Hash Based)
 - Useable on the server
 - Allows nested pseudo selectors
 - Allows nested media queries
 - No namespacing / Class name collisions.
+- Plays nicely with React Hot Loader and autoprefixer.
 
 ...oh, and did I mention you get duplicate style elimination for free?
 
@@ -31,6 +32,9 @@ const styles = StyleSheet.create({
     },
     [palm]: {                   // Media Queries are allowed
       fontSize: 16
+      ':hover': {
+        color: 'blue'  		// Pseudo selectors inside media queries.
+      }
     }
   }
 });
@@ -259,18 +263,24 @@ document.head.appendChild(stylesheet);
 React.render(<App />, document.getElementById('root'));
 ```
 
-### Development React Hot Loader
-If you're using [React Hot Loader](https://github.com/gaearon/react-hot-loader). Use the following approach in development to get hot loading styles.
+### React Hot Loader + Autoprefixer
+If you're using [React Hot Loader](https://github.com/gaearon/react-hot-loader). Use the following approach in development to get hot loading styles and autoprefixer awesomeness.
 
 ```javascript
 import React from 'react';
 import StyleSheet from 'stilr';
+import autoprefixer from 'autoprefixer-core';
+import postcss from 'postcss';
+
+
+// Make sure you have a style element with the ID: 'stylesheet' in your html.
+const stylesheet = document.getElementById('stylesheet');
 
 class App extends React.Component {
    render() {
      if (process.env !== 'production') {
-       // Make sure you have a style element with the ID: 'stylesheet' in your html.
-       document.getElementById('stylesheet').textContent = StyleSheet.render()
+       const prefixedCSS = postcss(autoprefixer()).process( StyleSheet.render() ).css;
+       stylesheet.textContent = prefixedCSS;
      }
      
      return (
@@ -279,6 +289,7 @@ class App extends React.Component {
    }
 }
 ```
+If you're using Webpack, you have to add `node: { fs: 'empty' }` to your config file. Otherwise autoprefixer will throw an error when trying to use it on the client.
 
 #### Production
 
@@ -293,8 +304,6 @@ The following snippet can also be executed anywhere to extract the styles.
 Remember to replace `./your-app.js` with the entry file of your app.
 `node -p "require('babel/register')({ignore: false}); var s = require('stilr'); require('./your-app.js')`
 
-##### Webpack
-Not implemented yet. Contributions are welcome!
 
 ## TODO:
 - [ ] Remove React as a dependency
