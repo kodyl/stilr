@@ -12,7 +12,7 @@ javascript and CSS combined.
 
 ...oh, and did I mention you get duplicate style elimination for free?
 
-__Note__: This library fits really nice with [React](https://facebook.github.io/react/) but should work with other libraries like [Angluar 2](https://angular.io/) or [Deku](https://github.com/dekujs/deku)
+__Note__: This library fits really nice with [React](https://facebook.github.io/react/) but should work with other libraries like [Angular 2](https://angular.io/) or [Deku](https://github.com/dekujs/deku)
 
 ## API
 
