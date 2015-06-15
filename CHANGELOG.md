@@ -10,6 +10,10 @@
 
 _Note: Gaps between patch versions are faulty/broken releases._
 
+## 1.1.0
+  * __Internal__
+    * Added babel-runtime as a dependency.
+
 ## 1.0.0
 __Yeah, 1.0.0!__
 The Api have been solidified, It's used in production, there's good test
