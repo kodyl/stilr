@@ -10,13 +10,21 @@
 
 _Note: Gaps between patch versions are faulty/broken releases._
 
+## 1.0.0
+__Yeah, 1.0.0!__
+The Api have been solidified, It's used in production, there's good test
+coverage, let's :shipit: !
+
+  * __Feature__
+    * It's now possible to use pseudo selectors inside media queries.
+
 ## 0.3.0
-  * Internal
+  * __Internal__
     * Media queries are now inserted after normal CSS
     * Null and empty classes are now removed from rendered CSS
 
 ## 0.2.2
-  * Bug Fix
+  * __Bug Fix__
     * Media queries are now inserted after parent entry. Thanks @MicheleBertoli
       !
     * New entries in existing media queries don't overwrite existing entries
