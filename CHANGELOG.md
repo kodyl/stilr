@@ -10,6 +10,14 @@
 
 _Note: Gaps between patch versions are faulty/broken releases._
 
+## 1.2.0
+  * Feature
+    * Exposes the StylesheetMap class that's used internally to create
+      stylesheet.
+      Usage: `import Stylesheet, { StylesheetMap } from 'stilr'`
+  * Bug
+    * Fixed stylesheet instanceof check
+
 ## 1.1.0
   * __Internal__
     * Added babel-runtime as a dependency.
