@@ -10,11 +10,11 @@
 
 _Note: Gaps between patch versions are faulty/broken releases._
 
-## 1.2.0
+## 1.2.1
   * Feature
-    * Exposes the StylesheetMap class that's used internally to create
+    * Exposes the Map class that's used internally to create
       stylesheet.
-      Usage: `import Stylesheet, { StylesheetMap } from 'stilr'`
+      Usage: `import Stylesheet from 'stilr'` `Stylesheet.Map`
   * Bug
     * Fixed stylesheet instanceof check
 
