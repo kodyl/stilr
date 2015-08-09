@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
       color: '#000'
     },
     [palm]: {                   // Media Queries are allowed
-      fontSize: 16
+      fontSize: 16,
       ':hover': {
         color: 'blue'  		// Pseudo selectors inside media queries.
       }
