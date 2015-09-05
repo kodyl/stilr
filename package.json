@@ -27,8 +27,7 @@
   "dependencies": {
     "react": ">=0.11.0",
     "babel-runtime": "^5.5.8",
-    "emmett": "^3.1.1",
-    "lodash.create": "^3.1.1"
+    "emmett": "^3.1.1"
   },
   "devDependencies": {
     "babel": "^5.5.8",
