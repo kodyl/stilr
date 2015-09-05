@@ -233,12 +233,8 @@ returned.
 
 ## Events
 
-You can use `require('stilr/events')` to obtain a module that is exactly the
-same as `require('stilr')` but has support for events in addition.
-It is kept in a separate file like that because of a larger file size.
-The exact additional features are:
-- Whenever `#create()` is called, the event `"update"` is emitted...
-- ...which you can listen to as follows, using the `on()` method:
+Whenever `#create()` is called, the event `"update"` is emitted, which you can
+listen to as follows, using the `on()` method:
 ```JS
 import StyleSheet from 'stilr';
 
