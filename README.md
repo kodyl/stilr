@@ -243,6 +243,13 @@ StyleSheet.on('update', () => { // No parameters are provided to the callback
 });
 ```
 
+To remove a listener, use the `off()` method:
+```JS
+StyleSheet.off('update'); // Remove all listeners attached to "update" event
+```
+For a full documentation of how you can use `off()`, read the
+[emmett](https://github.com/jacomyal/emmett#removing-listeners) documentation.
+
 ## Extracting your styles.
 
 #### Server
