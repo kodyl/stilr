@@ -36,8 +36,10 @@ link:
 	@npm link
 
 test:
-	@echo "\nTesting source files, hang on..."
+	@echo "\nTesting the non-events file, hang on..."
 	@$(BIN)/mocha $(MOCHA_DEV)
+	@echo "\nTesting the events file, hang on..."
+	@TEST_EVENTS=1 $(BIN)/mocha $(MOCHA_DEV)
 
 test-watch:
 	@echo "\nStarting test watcher..."

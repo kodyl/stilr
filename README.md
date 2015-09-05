@@ -231,6 +231,21 @@ Under the hood, stilr creates class names based on a content hash of your style 
 which means that when the content is the same, the same hash will always be
 returned. 
 
+## Events
+
+You can use `require('stilr/events')` to obtain a module that is exactly the
+same as `require('stilr')` but has support for events in addition.
+It is kept in a separate file like that because of a larger file size.
+The exact additional features are:
+- Whenever `#create()` is called, the event `"update"` is emitted...
+- ...which you can listen to as follows, using the `on()` method:
+```JS
+import StyleSheet from 'stilr';
+
+StyleSheet.on('update', () => { // No parameters are provided to the callback
+  console.log(StyleSheet.render()); // prints out the brand new CSS!
+});
+```
 
 ## Extracting your styles.
 
