@@ -231,6 +231,24 @@ Under the hood, stilr creates class names based on a content hash of your style 
 which means that when the content is the same, the same hash will always be
 returned. 
 
+## Events
+
+Whenever `#create()` is called, the event `"update"` is emitted, which you can
+listen to as follows, using the `on()` method:
+```JS
+import StyleSheet from 'stilr';
+
+StyleSheet.on('update', () => { // No parameters are provided to the callback
+  console.log(StyleSheet.render()); // prints out the brand new CSS!
+});
+```
+
+To remove a listener, use the `off()` method:
+```JS
+StyleSheet.off('update'); // Remove all listeners attached to "update" event
+```
+For a full documentation of how you can use `off()`, read the
+[emmett](https://github.com/jacomyal/emmett#removing-listeners) documentation.
 
 ## Extracting your styles.
 
