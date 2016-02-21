@@ -11,7 +11,8 @@
   "rules": {
     "quotes": [2, "single"],
     "strict": [2, "never"],
-    "curly": false,
-    "no-underscore-dangle": false
+    "curly": [0],
+    "no-underscore-dangle": [0],
+    "prefer-const": [2]
   }
 }
