@@ -38,9 +38,6 @@ link:
 lint:
 	@ $(BIN)/eslint lib/
 
-lint-dist:
-	@ $(BIN)/eslint dist/
-
 test:
 	@echo "\nTesting source files, hang on..."
 	@$(BIN)/mocha $(MOCHA_DEV)
@@ -53,7 +50,7 @@ test-dist:
 	@echo "\nTesting build files, almost there..!"
 	@$(BIN)/mocha $(MOCHA_DIST)
 
-build: lint test clean dist lint-dist test-dist
+build: lint test clean dist test-dist
 
 build-local: build link
 
