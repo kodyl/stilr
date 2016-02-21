@@ -4,10 +4,6 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
-
-function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
-
 var _utils = require('./utils');
 
 var globalStylesheet = new Map();
@@ -53,16 +49,9 @@ exports['default'] = {
           var mqStylesheet = undefined;
 
           if (Array.isArray(selector)) {
-            var _selector = _toArray(selector);
-
-            var main = _selector[0];
-            var _styles = _selector[1];
-
-            var rest = _selector.slice(2);
-
-            mqSelector = main;
-            mqPseudos = rest;
-            mqStyles = _styles;
+            mqSelector = selector[0];
+            mqStyles = selector[1];
+            mqPseudos = selector.slice(2);
           }
 
           delete style[mqSelector];
@@ -110,11 +99,8 @@ exports['default'] = {
       for (var _iterator = stylesheetEntries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var entry = _step.value;
 
-        var _entry = _slicedToArray(entry, 2);
-
-        var className = _entry[0];
-        var styles = _entry[1];
-
+        var className = entry[0];
+        var styles = entry[1];
         var isMap = styles instanceof Map;
 
         if (!isMap && (0, _utils.isEmpty)(styles)) continue;
