@@ -1,4 +1,8 @@
 language: node_js
 node_js:
-  - 'iojs'
+  - '5.6'
+  - '5.0'
+  - '4.3'
+  - '4.2'
+  - '4.0'
 script: make dist && make test-dist
