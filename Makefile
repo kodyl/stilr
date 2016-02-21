@@ -27,7 +27,7 @@ endef
 dist: $(DIST)
 dist/%.js: lib/%.js
 	@mkdir -p $(@D)
-	$(BIN)/babel $< -o $@ --stage 0 --optional runtime
+	$(BIN)/babel $< -o $@
 
 clean:
 	@rm -rf ./dist
