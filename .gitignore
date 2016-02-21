@@ -1,6 +1,5 @@
 node_modules
 npm-debug.log
 .DS_Store
-dist/
 .tern*
-lib/__tests__/temp*
+dist/__tests__
