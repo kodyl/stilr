@@ -36,6 +36,7 @@ link:
 	@npm link
 
 lint:
+	@echo "\nLinting source files..."
 	@ $(BIN)/eslint lib/
 
 test:
