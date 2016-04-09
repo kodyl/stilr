@@ -5,4 +5,4 @@ node_js:
   - '4.3'
   - '4.2'
   - '4.0'
-script: make dist && make test-dist
+script: make lint && make dist && make test-dist

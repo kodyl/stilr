@@ -1,6 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
@@ -8,7 +8,7 @@ var _utils = require('./utils');
 
 var globalStylesheet = new Map();
 
-exports['default'] = {
+exports.default = {
   create: function create(styles) {
     var stylesheet = arguments.length <= 1 || arguments[1] === undefined ? globalStylesheet : arguments[1];
 
@@ -46,7 +46,7 @@ exports['default'] = {
           var mqSelector = selector;
           var mqStyles = styles[key][selector];
           var mqPseudos = [];
-          var mqStylesheet = undefined;
+          var mqStylesheet = void 0;
 
           if (Array.isArray(selector)) {
             mqSelector = selector[0];
@@ -82,7 +82,6 @@ exports['default'] = {
       return acc;
     }, {});
   },
-
   render: function render() {
     var options = arguments.length <= 0 || arguments[0] === undefined ? { pretty: false } : arguments[0];
     var stylesheet = arguments.length <= 1 || arguments[1] === undefined ? globalStylesheet : arguments[1];
@@ -119,8 +118,8 @@ exports['default'] = {
       _iteratorError = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion && _iterator['return']) {
-          _iterator['return']();
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
         }
       } finally {
         if (_didIteratorError) {
@@ -131,13 +130,13 @@ exports['default'] = {
 
     return css + mediaQueries;
   },
-
   clear: function clear() {
     var stylesheet = arguments.length <= 0 || arguments[0] === undefined ? globalStylesheet : arguments[0];
 
     stylesheet.clear();
     return !stylesheet.size;
   },
+
 
   Map: Map,
 

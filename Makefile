@@ -3,11 +3,11 @@ PATH       := $(BIN):$(PATH)
 LIB         = $(shell find lib -name "*.js")
 DIST        = $(patsubst lib/%.js,dist/%.js,$(LIB))
 
-MOCHA_ARGS  = --require mocha-clean \
-              --require babel/polyfill
+MOCHA_ARGS  = --require mocha-clean
 
 MOCHA_DEV   = $(MOCHA_ARGS) \
-              --require lib/__tests__/babelinit \
+              --require babel-polyfill \
+              --compilers js:babel-register \
               ./lib/__tests__/*.test.js
 
 MOCHA_DIST  = $(MOCHA_ARGS) \
@@ -26,17 +26,20 @@ endef
 
 dist: $(DIST)
 dist/%.js: lib/%.js
+	@echo "Building $<"
 	@mkdir -p $(@D)
-	$(BIN)/babel $< -o $@
+	@$(BIN)/babel $< -o $@
 
 clean:
+	@echo "\nRemove existing build files..."
 	@rm -rf ./dist
 
 link:
 	@npm link
 
 lint:
-	@ $(BIN)/eslint lib/
+	@echo "\nLinting source files..."
+	@$(BIN)/eslint lib/
 
 test:
 	@echo "\nTesting source files, hang on..."

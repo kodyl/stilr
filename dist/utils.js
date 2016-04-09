@@ -1,8 +1,11 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 exports.sortObject = sortObject;
 exports.createHash = createHash;
 exports.stringifyObject = stringifyObject;
@@ -14,7 +17,7 @@ exports.isPseudo = isPseudo;
 exports.isMediaQuery = isMediaQuery;
 exports.seperateStyles = seperateStyles;
 
-var _reactLibCSSPropertyOperations = require('react/lib/CSSPropertyOperations');
+var _CSSPropertyOperations = require('react/lib/CSSPropertyOperations');
 
 function sortObject(obj) {
   return Object.keys(obj).sort().reduce(function (acc, key) {
@@ -29,9 +32,9 @@ function createHash(str) {
   if (i === 0) return 0;
 
   var hash = 5381;
-  while (i) hash = hash * 33 ^ str.charCodeAt(--i);
-
-  return hash >>> 0;
+  while (i) {
+    hash = hash * 33 ^ str.charCodeAt(--i);
+  }return hash >>> 0;
 }
 
 function stringifyObject(obj) {
@@ -46,7 +49,6 @@ function stringifyObject(obj) {
 }
 
 var SYMBOL_SET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-
 function extendedToString(num, base) {
   var conversion = '';
 
@@ -66,7 +68,7 @@ function createClassName(obj) {
 }
 
 function createMarkup(obj) {
-  return (0, _reactLibCSSPropertyOperations.createMarkupForStyles)(obj);
+  return (0, _CSSPropertyOperations.createMarkupForStyles)(obj);
 }
 
 function isEmpty(obj) {
@@ -77,14 +79,14 @@ function isPseudo(_ref) {
   var style = _ref.style;
   var rule = _ref.rule;
 
-  return rule.charAt(0) === ':' && typeof style === 'object';
+  return rule.charAt(0) === ':' && (typeof style === 'undefined' ? 'undefined' : _typeof(style)) === 'object';
 }
 
 function isMediaQuery(_ref2) {
   var style = _ref2.style;
   var rule = _ref2.rule;
 
-  return rule.charAt(0) === '@' && typeof style === 'object';
+  return rule.charAt(0) === '@' && (typeof style === 'undefined' ? 'undefined' : _typeof(style)) === 'object';
 }
 
 function handle(type, acc, _ref3) {
