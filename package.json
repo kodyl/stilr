@@ -39,7 +39,6 @@
     "babel": "^6.5.2",
     "babel-cli": "^6.7.5",
     "babel-core": "^6.7.6",
-    "babel-eslint": "^6.0.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-polyfill": "^6.7.4",
@@ -47,7 +46,6 @@
     "babel-register": "^6.7.2",
     "css": "^2.2.0",
     "eslint": "^2.7.0",
-    "eslint-plugin-react": "^4.0.0",
     "mocha": "^2.2.4",
     "mocha-clean": "^1.0.0",
     "semver": "^5.1.0"
