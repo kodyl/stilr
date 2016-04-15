@@ -271,7 +271,7 @@ If you're using [React Hot Loader](https://github.com/gaearon/react-hot-loader).
 ```javascript
 import React from 'react';
 import StyleSheet from 'stilr';
-import autoprefixer from 'autoprefixer-core';
+import autoprefixer from 'autoprefixer';
 import postcss from 'postcss';
 
 

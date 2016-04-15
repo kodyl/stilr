@@ -1,20 +1,34 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _getIterator2 = require('babel-runtime/core-js/get-iterator');
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _map = require('babel-runtime/core-js/map');
+
+var _map2 = _interopRequireDefault(_map);
+
 var _utils = require('./utils');
 
-var globalStylesheet = new Map();
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports['default'] = {
+var globalStylesheet = new _map2.default();
+
+exports.default = {
   create: function create(styles) {
     var stylesheet = arguments.length <= 1 || arguments[1] === undefined ? globalStylesheet : arguments[1];
 
-    if (!(stylesheet instanceof Map)) throw new Error(stylesheet + ' should be a Map');
+    if (!(stylesheet instanceof _map2.default)) throw new Error(stylesheet + ' should be a Map');
 
-    return Object.keys(styles).reduce(function (acc, key) {
+    return (0, _keys2.default)(styles).reduce(function (acc, key) {
       var _seperateStyles = (0, _utils.seperateStyles)(styles[key]);
 
       var style = _seperateStyles.style;
@@ -46,7 +60,7 @@ exports['default'] = {
           var mqSelector = selector;
           var mqStyles = styles[key][selector];
           var mqPseudos = [];
-          var mqStylesheet = undefined;
+          var mqStylesheet = void 0;
 
           if (Array.isArray(selector)) {
             mqSelector = selector[0];
@@ -62,7 +76,7 @@ exports['default'] = {
             if (mqStylesheet.has(className)) return false;
           }
 
-          mqStylesheet = mqStylesheet || stylesheet.set(mqSelector, new Map()).get(mqSelector);
+          mqStylesheet = mqStylesheet || stylesheet.set(mqSelector, new _map2.default()).get(mqSelector);
 
           mqStylesheet.set(className, mqStyles);
 
@@ -82,7 +96,6 @@ exports['default'] = {
       return acc;
     }, {});
   },
-
   render: function render() {
     var options = arguments.length <= 0 || arguments[0] === undefined ? { pretty: false } : arguments[0];
     var stylesheet = arguments.length <= 1 || arguments[1] === undefined ? globalStylesheet : arguments[1];
@@ -96,12 +109,12 @@ exports['default'] = {
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = stylesheetEntries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (var _iterator = (0, _getIterator3.default)(stylesheetEntries), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var entry = _step.value;
 
         var className = entry[0];
         var styles = entry[1];
-        var isMap = styles instanceof Map;
+        var isMap = styles instanceof _map2.default;
 
         if (!isMap && (0, _utils.isEmpty)(styles)) continue;
 
@@ -119,8 +132,8 @@ exports['default'] = {
       _iteratorError = err;
     } finally {
       try {
-        if (!_iteratorNormalCompletion && _iterator['return']) {
-          _iterator['return']();
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
         }
       } finally {
         if (_didIteratorError) {
@@ -131,7 +144,6 @@ exports['default'] = {
 
     return css + mediaQueries;
   },
-
   clear: function clear() {
     var stylesheet = arguments.length <= 0 || arguments[0] === undefined ? globalStylesheet : arguments[0];
 
@@ -139,7 +151,8 @@ exports['default'] = {
     return !stylesheet.size;
   },
 
-  Map: Map,
+
+  Map: _map2.default,
 
   __stylesheet: globalStylesheet
 };
