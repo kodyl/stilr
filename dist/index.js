@@ -4,17 +4,31 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _getIterator2 = require('babel-runtime/core-js/get-iterator');
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _map = require('babel-runtime/core-js/map');
+
+var _map2 = _interopRequireDefault(_map);
+
 var _utils = require('./utils');
 
-var globalStylesheet = new Map();
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var globalStylesheet = new _map2.default();
 
 exports.default = {
   create: function create(styles) {
     var stylesheet = arguments.length <= 1 || arguments[1] === undefined ? globalStylesheet : arguments[1];
 
-    if (!(stylesheet instanceof Map)) throw new Error(stylesheet + ' should be a Map');
+    if (!(stylesheet instanceof _map2.default)) throw new Error(stylesheet + ' should be a Map');
 
-    return Object.keys(styles).reduce(function (acc, key) {
+    return (0, _keys2.default)(styles).reduce(function (acc, key) {
       var _seperateStyles = (0, _utils.seperateStyles)(styles[key]);
 
       var style = _seperateStyles.style;
@@ -62,7 +76,7 @@ exports.default = {
             if (mqStylesheet.has(className)) return false;
           }
 
-          mqStylesheet = mqStylesheet || stylesheet.set(mqSelector, new Map()).get(mqSelector);
+          mqStylesheet = mqStylesheet || stylesheet.set(mqSelector, new _map2.default()).get(mqSelector);
 
           mqStylesheet.set(className, mqStyles);
 
@@ -95,12 +109,12 @@ exports.default = {
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = stylesheetEntries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      for (var _iterator = (0, _getIterator3.default)(stylesheetEntries), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var entry = _step.value;
 
         var className = entry[0];
         var styles = entry[1];
-        var isMap = styles instanceof Map;
+        var isMap = styles instanceof _map2.default;
 
         if (!isMap && (0, _utils.isEmpty)(styles)) continue;
 
@@ -138,7 +152,7 @@ exports.default = {
   },
 
 
-  Map: Map,
+  Map: _map2.default,
 
   __stylesheet: globalStylesheet
 };

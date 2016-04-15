@@ -4,7 +4,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof2 = require('babel-runtime/helpers/typeof');
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+var _isInteger = require('babel-runtime/core-js/number/is-integer');
+
+var _isInteger2 = _interopRequireDefault(_isInteger);
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
 
 exports.sortObject = sortObject;
 exports.createHash = createHash;
@@ -19,8 +29,10 @@ exports.seperateStyles = seperateStyles;
 
 var _CSSPropertyOperations = require('react/lib/CSSPropertyOperations');
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function sortObject(obj) {
-  return Object.keys(obj).sort().reduce(function (acc, key) {
+  return (0, _keys2.default)(obj).sort().reduce(function (acc, key) {
     var val = obj[key];
     if (val || val === 0) acc[key] = val;
     return acc;
@@ -38,7 +50,7 @@ function createHash(str) {
 }
 
 function stringifyObject(obj) {
-  var keys = Object.keys(obj);
+  var keys = (0, _keys2.default)(obj);
   var str = '';
 
   for (var i = 0, len = keys.length; i < len; i++) {
@@ -52,7 +64,7 @@ var SYMBOL_SET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 function extendedToString(num, base) {
   var conversion = '';
 
-  if (base > SYMBOL_SET.length || base <= 1 || !Number.isInteger(base)) throw new Error(base + ' should be an integer between 1 and ' + SYMBOL_SET.length);
+  if (base > SYMBOL_SET.length || base <= 1 || !(0, _isInteger2.default)(base)) throw new Error(base + ' should be an integer between 1 and ' + SYMBOL_SET.length);
 
   while (num >= 1) {
     conversion = SYMBOL_SET[num - base * Math.floor(num / base)] + conversion;
@@ -72,21 +84,21 @@ function createMarkup(obj) {
 }
 
 function isEmpty(obj) {
-  return !Object.keys(obj).length;
+  return !(0, _keys2.default)(obj).length;
 }
 
 function isPseudo(_ref) {
   var style = _ref.style;
   var rule = _ref.rule;
 
-  return rule.charAt(0) === ':' && (typeof style === 'undefined' ? 'undefined' : _typeof(style)) === 'object';
+  return rule.charAt(0) === ':' && (typeof style === 'undefined' ? 'undefined' : (0, _typeof3.default)(style)) === 'object';
 }
 
 function isMediaQuery(_ref2) {
   var style = _ref2.style;
   var rule = _ref2.rule;
 
-  return rule.charAt(0) === '@' && (typeof style === 'undefined' ? 'undefined' : _typeof(style)) === 'object';
+  return rule.charAt(0) === '@' && (typeof style === 'undefined' ? 'undefined' : (0, _typeof3.default)(style)) === 'object';
 }
 
 function handle(type, acc, _ref3) {
@@ -103,7 +115,7 @@ function handle(type, acc, _ref3) {
 }
 
 function seperateStyles(styles) {
-  return Object.keys(styles).reduce(function (acc, rule) {
+  return (0, _keys2.default)(styles).reduce(function (acc, rule) {
     var content = {
       style: styles[rule],
       rule: rule
