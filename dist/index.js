@@ -24,16 +24,15 @@ var globalStylesheet = new _map2.default();
 
 exports.default = {
   create: function create(styles) {
-    var stylesheet = arguments.length <= 1 || arguments[1] === undefined ? globalStylesheet : arguments[1];
+    var stylesheet = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalStylesheet;
 
     if (!(stylesheet instanceof _map2.default)) throw new Error(stylesheet + ' should be a Map');
 
     return (0, _keys2.default)(styles).reduce(function (acc, key) {
-      var _seperateStyles = (0, _utils.seperateStyles)(styles[key]);
-
-      var style = _seperateStyles.style;
-      var pseudos = _seperateStyles.pseudos;
-      var mediaQueries = _seperateStyles.mediaQueries;
+      var _seperateStyles = (0, _utils.seperateStyles)(styles[key]),
+          style = _seperateStyles.style,
+          pseudos = _seperateStyles.pseudos,
+          mediaQueries = _seperateStyles.mediaQueries;
 
       var className = (0, _utils.createClassName)((0, _utils.sortObject)(style));
 
@@ -97,8 +96,8 @@ exports.default = {
     }, {});
   },
   render: function render() {
-    var options = arguments.length <= 0 || arguments[0] === undefined ? { pretty: false } : arguments[0];
-    var stylesheet = arguments.length <= 1 || arguments[1] === undefined ? globalStylesheet : arguments[1];
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { pretty: false };
+    var stylesheet = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalStylesheet;
 
     var stylesheetEntries = stylesheet.entries();
     var css = '';
@@ -145,7 +144,7 @@ exports.default = {
     return css + mediaQueries;
   },
   clear: function clear() {
-    var stylesheet = arguments.length <= 0 || arguments[0] === undefined ? globalStylesheet : arguments[0];
+    var stylesheet = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : globalStylesheet;
 
     stylesheet.clear();
     return !stylesheet.size;
