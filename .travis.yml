@@ -1,8 +1,7 @@
 language: node_js
 node_js:
-  - '5.6'
-  - '5.0'
-  - '4.3'
-  - '4.2'
-  - '4.0'
-script: make lint && make dist && make test-dist
+  - 'node'
+  - '6'
+  - '5'
+  - '4'
+script: make build
