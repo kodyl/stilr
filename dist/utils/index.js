@@ -27,7 +27,7 @@ exports.isPseudo = isPseudo;
 exports.isMediaQuery = isMediaQuery;
 exports.seperateStyles = seperateStyles;
 
-var _CSSPropertyOperations = require('react/lib/CSSPropertyOperations');
+var _CSSPropertyOperations = require('./CSSPropertyOperations');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -88,23 +88,23 @@ function isEmpty(obj) {
 }
 
 function isPseudo(_ref) {
-  var style = _ref.style;
-  var rule = _ref.rule;
+  var style = _ref.style,
+      rule = _ref.rule;
 
   return rule.charAt(0) === ':' && (typeof style === 'undefined' ? 'undefined' : (0, _typeof3.default)(style)) === 'object';
 }
 
 function isMediaQuery(_ref2) {
-  var style = _ref2.style;
-  var rule = _ref2.rule;
+  var style = _ref2.style,
+      rule = _ref2.rule;
 
   return rule.charAt(0) === '@' && (typeof style === 'undefined' ? 'undefined' : (0, _typeof3.default)(style)) === 'object';
 }
 
 function handle(type, acc, _ref3) {
-  var style = _ref3.style;
-  var rule = _ref3.rule;
-  var pseudos = arguments.length <= 3 || arguments[3] === undefined ? [] : arguments[3];
+  var style = _ref3.style,
+      rule = _ref3.rule;
+  var pseudos = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
 
   var hash = createClassName(sortObject(style));
   var rules = pseudos.length ? [[].concat(rule, style, pseudos)] : rule;
@@ -126,10 +126,9 @@ function seperateStyles(styles) {
     }
 
     if (isMediaQuery(content)) {
-      var _seperateStyles = seperateStyles(content.style);
-
-      var style = _seperateStyles.style;
-      var pseudos = _seperateStyles.pseudos;
+      var _seperateStyles = seperateStyles(content.style),
+          style = _seperateStyles.style,
+          pseudos = _seperateStyles.pseudos;
 
       return handle('mediaQueries', acc, { rule: rule, style: style }, pseudos);
     }
