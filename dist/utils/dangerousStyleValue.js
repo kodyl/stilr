@@ -1,13 +1,20 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
+var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = dangerousStyleValue;
 
-var _CSSProperty = require('./CSSProperty');
+exports["default"] = dangerousStyleValue;
 
-var _fbjs = require('./fbjs');
+var _trim = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/trim"));
+
+var _CSSProperty = require("./CSSProperty");
+
+var _fbjs = require("./fbjs");
 
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -19,9 +26,7 @@ var _fbjs = require('./fbjs');
  *
  * @providesModule dangerousStyleValue
  */
-
 var styleWarnings = {};
-
 /**
  * Convert a value into the proper css writable value. The style name `name`
  * should be logical (no hyphens), as specified
@@ -32,6 +37,7 @@ var styleWarnings = {};
  * @param {ReactDOMComponent} component
  * @return {string} Normalized style value with dimensions applied.
  */
+
 function dangerousStyleValue(name, value, component) {
   // Note that we've removed escapeTextForBrowser() calls here since the
   // whole string will be escaped when the attribute is injected into
@@ -42,13 +48,14 @@ function dangerousStyleValue(name, value, component) {
   // This is not an XSS hole but instead a potential CSS injection issue
   // which has lead to a greater discussion about how we're going to
   // trust URLs moving forward. See #2115901
-
   var isEmpty = value == null || typeof value === 'boolean' || value === '';
+
   if (isEmpty) {
     return '';
   }
 
   var isNonNumeric = isNaN(value);
+
   if (isNonNumeric || value === 0 || _CSSProperty.isUnitlessNumber.hasOwnProperty(name) && _CSSProperty.isUnitlessNumber[name]) {
     return '' + value; // cast to string
   }
@@ -58,24 +65,30 @@ function dangerousStyleValue(name, value, component) {
       if (component) {
         var owner = component._currentElement._owner;
         var ownerName = owner ? owner.getName() : null;
+
         if (ownerName && !styleWarnings[ownerName]) {
           styleWarnings[ownerName] = {};
         }
+
         var warned = false;
+
         if (ownerName) {
           var warnings = styleWarnings[ownerName];
           warned = warnings[name];
+
           if (!warned) {
             warnings[name] = true;
           }
         }
+
         if (!warned) {
           (0, _fbjs.warning)(false, 'a `%s` tag (owner: `%s`) was passed a numeric string value ' + 'for CSS property `%s` (value: `%s`) which will be treated ' + 'as a unitless number in a future version of React.', component._currentElement.type, ownerName || 'unknown', name, value);
         }
       }
     }
-    value = value.trim();
+
+    value = (0, _trim["default"])(value).call(value);
   }
+
   return value + 'px';
 }
-module.exports = exports['default'];

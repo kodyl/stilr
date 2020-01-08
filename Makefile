@@ -6,8 +6,8 @@ DIST        = $(patsubst lib/%.js,dist/%.js,$(LIB))
 MOCHA_ARGS  = --require mocha-clean
 
 MOCHA_DEV   = $(MOCHA_ARGS) \
-              --require babel-polyfill \
-              --compilers js:babel-register \
+              --require @babel/polyfill \
+              --compilers js:@babel/register \
               ./lib/__tests__/*.test.js
 
 MOCHA_DIST  = $(MOCHA_ARGS) \

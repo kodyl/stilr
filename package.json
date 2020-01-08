@@ -2,9 +2,23 @@
   "name": "stilr",
   "version": "1.3.0",
   "description": "Encapsulated styling for your javascript components with all the power of javascript and CSS combined. Usefull with React",
+  "author": "Kodyl ApS",
+  "contributors": [
+    {
+      "name": "Chris Kjær Sørensen"
+    },
+    {
+      "name": "Daniel Juhl"
+    }
+  ],
+  "repository": "kodyl/stilr",
+  "license": "MIT",
   "main": "dist",
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "clean": "rm -rf ./dist",
+    "dist": "NODE_ENV=production babel lib --out-dir dist --copy-files",
+    "release": "np"
   },
   "keywords": [
     "sleek",
@@ -22,33 +36,22 @@
     "encapsulation",
     "react-component"
   ],
-  "author": "Kodyl ApS",
-  "contributors": [
-    {
-      "name": "Chris Kjær Sørensen"
-    },
-    {
-      "name": "Daniel Juhl"
-    }
-  ],
-  "license": "MIT",
-  "dependencies": {
-    "babel-runtime": "^6.6.1"
+  "peerDependencies": {
+    "@babel/runtime-corejs3": "^7.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.18.2",
-    "babel-loader": "^6.2.8",
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-polyfill": "^6.16.0",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-register": "^6.18.0",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.0",
     "css": "^2.2.0",
     "eslint": "^3.10.2",
     "mocha": "^3.1.2",
     "mocha-clean": "^1.0.0",
+    "np": "^5.2.1",
     "semver": "^5.3.0"
-  },
-  "repository": "kodyl/stilr"
+  }
 }

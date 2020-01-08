@@ -1,15 +1,20 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
+var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
   value: true
 });
-exports.shorthandPropertyExpansions = exports.isUnitlessNumber = undefined;
 
-var _keys = require('babel-runtime/core-js/object/keys');
+exports.shorthandPropertyExpansions = exports.isUnitlessNumber = void 0;
 
-var _keys2 = _interopRequireDefault(_keys);
+var _keys = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/object/keys"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _forEach = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/for-each"));
+
+var _context;
 
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -25,8 +30,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * CSS properties which accept numbers but are not in units of "px".
  */
-
-var isUnitlessNumber = exports.isUnitlessNumber = {
+var isUnitlessNumber = {
   animationIterationCount: true,
   borderImageOutset: true,
   borderImageSlice: true,
@@ -53,7 +57,6 @@ var isUnitlessNumber = exports.isUnitlessNumber = {
   widows: true,
   zIndex: true,
   zoom: true,
-
   // SVG-related properties
   fillOpacity: true,
   floodOpacity: true,
@@ -64,31 +67,32 @@ var isUnitlessNumber = exports.isUnitlessNumber = {
   strokeOpacity: true,
   strokeWidth: true
 };
-
 /**
  * @param {string} prefix vendor-specific prefix, eg: Webkit
  * @param {string} key style name, eg: transitionDuration
  * @return {string} style name prefixed with `prefix`, properly camelCased, eg:
  * WebkitTransitionDuration
  */
+
+exports.isUnitlessNumber = isUnitlessNumber;
+
 function prefixKey(prefix, key) {
   return prefix + key.charAt(0).toUpperCase() + key.substring(1);
 }
-
 /**
  * Support style names that may come passed in prefixed by adding permutations
  * of vendor prefixes.
  */
-var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
 
-// Using Object.keys here, or else the vanilla for-in loop makes IE8 go into an
+
+var prefixes = ['Webkit', 'ms', 'Moz', 'O']; // Using Object.keys here, or else the vanilla for-in loop makes IE8 go into an
 // infinite loop, because it iterates over the newly added props too.
-(0, _keys2.default)(isUnitlessNumber).forEach(function (prop) {
-  prefixes.forEach(function (prefix) {
+
+(0, _forEach["default"])(_context = (0, _keys["default"])(isUnitlessNumber)).call(_context, function (prop) {
+  (0, _forEach["default"])(prefixes).call(prefixes, function (prefix) {
     isUnitlessNumber[prefixKey(prefix, prop)] = isUnitlessNumber[prop];
   });
 });
-
 /**
  * Most style properties can be unset by doing .style[prop] = '' but IE8
  * doesn't like doing that with shorthand properties so for the properties that
@@ -98,7 +102,8 @@ var prefixes = ['Webkit', 'ms', 'Moz', 'O'];
  * behave without any problems. Curiously, list-style works too without any
  * special prodding.
  */
-var shorthandPropertyExpansions = exports.shorthandPropertyExpansions = {
+
+var shorthandPropertyExpansions = {
   background: {
     backgroundAttachment: true,
     backgroundColor: true,
@@ -150,3 +155,4 @@ var shorthandPropertyExpansions = exports.shorthandPropertyExpansions = {
     outlineColor: true
   }
 };
+exports.shorthandPropertyExpansions = shorthandPropertyExpansions;

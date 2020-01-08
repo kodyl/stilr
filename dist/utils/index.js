@@ -1,20 +1,12 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
+var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
+
+var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
+
+_Object$defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _typeof2 = require('babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-var _isInteger = require('babel-runtime/core-js/number/is-integer');
-
-var _isInteger2 = _interopRequireDefault(_isInteger);
-
-var _keys = require('babel-runtime/core-js/object/keys');
-
-var _keys2 = _interopRequireDefault(_keys);
 
 exports.sortObject = sortObject;
 exports.createHash = createHash;
@@ -27,12 +19,26 @@ exports.isPseudo = isPseudo;
 exports.isMediaQuery = isMediaQuery;
 exports.seperateStyles = seperateStyles;
 
-var _CSSPropertyOperations = require('./CSSPropertyOperations');
+var _typeof2 = _interopRequireDefault(require("@babel/runtime-corejs3/helpers/typeof"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _parseInt2 = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/parse-int"));
+
+var _concat = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/concat"));
+
+var _isInteger = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/number/is-integer"));
+
+var _keys = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/object/keys"));
+
+var _sort = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/sort"));
+
+var _reduce = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/reduce"));
+
+var _CSSPropertyOperations = require("./CSSPropertyOperations");
 
 function sortObject(obj) {
-  return (0, _keys2.default)(obj).sort().reduce(function (acc, key) {
+  var _context, _context2;
+
+  return (0, _reduce["default"])(_context = (0, _sort["default"])(_context2 = (0, _keys["default"])(obj)).call(_context2)).call(_context, function (acc, key) {
     var val = obj[key];
     if (val || val === 0) acc[key] = val;
     return acc;
@@ -42,15 +48,17 @@ function sortObject(obj) {
 function createHash(str) {
   var i = str.length;
   if (i === 0) return 0;
-
   var hash = 5381;
+
   while (i) {
     hash = hash * 33 ^ str.charCodeAt(--i);
-  }return hash >>> 0;
+  }
+
+  return hash >>> 0;
 }
 
 function stringifyObject(obj) {
-  var keys = (0, _keys2.default)(obj);
+  var keys = (0, _keys["default"])(obj);
   var str = '';
 
   for (var i = 0, len = keys.length; i < len; i++) {
@@ -61,17 +69,19 @@ function stringifyObject(obj) {
 }
 
 var SYMBOL_SET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-function extendedToString(num, base) {
-  var conversion = '';
 
-  if (base > SYMBOL_SET.length || base <= 1 || !(0, _isInteger2.default)(base)) throw new Error(base + ' should be an integer between 1 and ' + SYMBOL_SET.length);
+function extendedToString(num, base) {
+  var _context3;
+
+  var conversion = '';
+  if (base > SYMBOL_SET.length || base <= 1 || !(0, _isInteger["default"])(base)) throw new Error((0, _concat["default"])(_context3 = "".concat(base, " should be an integer between 1 and ")).call(_context3, SYMBOL_SET.length));
 
   while (num >= 1) {
     conversion = SYMBOL_SET[num - base * Math.floor(num / base)] + conversion;
     num = Math.floor(num / base);
   }
 
-  return base < 11 ? parseInt(conversion) : conversion;
+  return base < 11 ? (0, _parseInt2["default"])(conversion) : conversion;
 }
 
 function createClassName(obj) {
@@ -84,38 +94,38 @@ function createMarkup(obj) {
 }
 
 function isEmpty(obj) {
-  return !(0, _keys2.default)(obj).length;
+  return !(0, _keys["default"])(obj).length;
 }
 
 function isPseudo(_ref) {
   var style = _ref.style,
       rule = _ref.rule;
-
-  return rule.charAt(0) === ':' && (typeof style === 'undefined' ? 'undefined' : (0, _typeof3.default)(style)) === 'object';
+  return rule.charAt(0) === ':' && (0, _typeof2["default"])(style) === 'object';
 }
 
 function isMediaQuery(_ref2) {
   var style = _ref2.style,
       rule = _ref2.rule;
-
-  return rule.charAt(0) === '@' && (typeof style === 'undefined' ? 'undefined' : (0, _typeof3.default)(style)) === 'object';
+  return rule.charAt(0) === '@' && (0, _typeof2["default"])(style) === 'object';
 }
 
 function handle(type, acc, _ref3) {
+  var _context4, _context5;
+
   var style = _ref3.style,
       rule = _ref3.rule;
   var pseudos = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-
   var hash = createClassName(sortObject(style));
-  var rules = pseudos.length ? [[].concat(rule, style, pseudos)] : rule;
-
-  acc[type] = acc[type].concat(rules);
+  var rules = pseudos.length ? [(0, _concat["default"])(_context4 = []).call(_context4, rule, style, pseudos)] : rule;
+  acc[type] = (0, _concat["default"])(_context5 = acc[type]).call(_context5, rules);
   acc.style[rule] = hash;
   return acc;
 }
 
 function seperateStyles(styles) {
-  return (0, _keys2.default)(styles).reduce(function (acc, rule) {
+  var _context6;
+
+  return (0, _reduce["default"])(_context6 = (0, _keys["default"])(styles)).call(_context6, function (acc, rule) {
     var content = {
       style: styles[rule],
       rule: rule
@@ -130,7 +140,10 @@ function seperateStyles(styles) {
           style = _seperateStyles.style,
           pseudos = _seperateStyles.pseudos;
 
-      return handle('mediaQueries', acc, { rule: rule, style: style }, pseudos);
+      return handle('mediaQueries', acc, {
+        rule: rule,
+        style: style
+      }, pseudos);
     }
 
     acc.style[rule] = content.style;
