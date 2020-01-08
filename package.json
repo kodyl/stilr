@@ -53,5 +53,11 @@
     "mocha-clean": "^1.0.0",
     "np": "^5.2.1",
     "semver": "^5.3.0"
+  },
+  "prettier": {
+    "bracketSpacing": true,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none"
   }
 }
