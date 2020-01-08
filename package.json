@@ -36,7 +36,7 @@
     "encapsulation",
     "react-component"
   ],
-  "peerDependencies": {
+  "dependencies": {
     "@babel/runtime-corejs3": "^7.0.0"
   },
   "devDependencies": {
