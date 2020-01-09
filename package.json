@@ -37,7 +37,7 @@
     "react-component"
   ],
   "dependencies": {
-    "@babel/runtime-corejs3": "^7.0.0"
+    "@babel/runtime": "^7.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

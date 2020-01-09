@@ -1,16 +1,9 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
-
-var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
-
-_Object$defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 exports["default"] = dangerousStyleValue;
-
-var _trim = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/trim"));
 
 var _CSSProperty = require("./CSSProperty");
 
@@ -87,7 +80,7 @@ function dangerousStyleValue(name, value, component) {
       }
     }
 
-    value = (0, _trim["default"])(value).call(value);
+    value = value.trim();
   }
 
   return value + 'px';

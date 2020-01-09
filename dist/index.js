@@ -1,43 +1,18 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
-
-var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
-
-_Object$defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 exports["default"] = void 0;
-
-var _getIterator2 = _interopRequireDefault(require("@babel/runtime-corejs3/core-js/get-iterator"));
-
-var _entries = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/entries"));
-
-var _slice = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/slice"));
-
-var _isArray = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/array/is-array"));
-
-var _concat = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/concat"));
-
-var _map = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/map"));
-
-var _keys = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/object/keys"));
-
-var _reduce = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/reduce"));
-
-var _map2 = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/map"));
 
 var _utils = require("./utils");
 
-var globalStylesheet = new _map2["default"]();
+var globalStylesheet = new Map();
 var _default = {
   create: function create(styles) {
-    var _context;
-
     var stylesheet = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalStylesheet;
-    if (!(stylesheet instanceof _map2["default"])) throw new Error("".concat(stylesheet, " should be a Map"));
-    return (0, _reduce["default"])(_context = (0, _keys["default"])(styles)).call(_context, function (acc, key) {
+    if (!(stylesheet instanceof Map)) throw new Error("".concat(stylesheet, " should be a Map"));
+    return Object.keys(styles).reduce(function (acc, key) {
       var _seperateStyles = (0, _utils.seperateStyles)(styles[key]),
           style = _seperateStyles.style,
           pseudos = _seperateStyles.pseudos,
@@ -53,27 +28,25 @@ var _default = {
       if (!stylesheet.has(className)) stylesheet.set(className, style);
 
       if (pseudos.length) {
-        (0, _map["default"])(pseudos).call(pseudos, function (selector) {
-          var _context2;
-
+        pseudos.map(function (selector) {
           delete style[selector];
-          var pseudoClassName = (0, _concat["default"])(_context2 = "".concat(className)).call(_context2, selector);
+          var pseudoClassName = "".concat(className).concat(selector);
           if (stylesheet.has(pseudoClassName)) return false;
           stylesheet.set(pseudoClassName, styles[key][selector]);
         });
       }
 
       if (mediaQueries.length) {
-        (0, _map["default"])(mediaQueries).call(mediaQueries, function (selector) {
+        mediaQueries.map(function (selector) {
           var mqSelector = selector;
           var mqStyles = styles[key][selector];
           var mqPseudos = [];
           var mqStylesheet;
 
-          if ((0, _isArray["default"])(selector)) {
+          if (Array.isArray(selector)) {
             mqSelector = selector[0];
             mqStyles = selector[1];
-            mqPseudos = (0, _slice["default"])(selector).call(selector, 2);
+            mqPseudos = selector.slice(2);
           }
 
           delete style[mqSelector];
@@ -83,15 +56,13 @@ var _default = {
             if (mqStylesheet.has(className)) return false;
           }
 
-          mqStylesheet = mqStylesheet || stylesheet.set(mqSelector, new _map2["default"]()).get(mqSelector);
+          mqStylesheet = mqStylesheet || stylesheet.set(mqSelector, new Map()).get(mqSelector);
           mqStylesheet.set(className, mqStyles);
 
           if (mqPseudos.length) {
-            (0, _map["default"])(mqPseudos).call(mqPseudos, function (pseudo) {
-              var _context3;
-
+            mqPseudos.map(function (pseudo) {
               delete mqStyles[pseudo];
-              var pseudoClassName = (0, _concat["default"])(_context3 = "".concat(className)).call(_context3, pseudo);
+              var pseudoClassName = "".concat(className).concat(pseudo);
               if (mqStylesheet.has(pseudoClassName)) return false;
               mqStylesheet.set(pseudoClassName, styles[key][mqSelector][pseudo]);
             });
@@ -108,7 +79,7 @@ var _default = {
       pretty: false
     };
     var stylesheet = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : globalStylesheet;
-    var stylesheetEntries = (0, _entries["default"])(stylesheet).call(stylesheet);
+    var stylesheetEntries = stylesheet.entries();
     var css = '';
     var mediaQueries = '';
     var _iteratorNormalCompletion = true;
@@ -116,25 +87,21 @@ var _default = {
     var _iteratorError = undefined;
 
     try {
-      for (var _iterator = (0, _getIterator2["default"])(stylesheetEntries), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var _context6, _context7;
-
+      for (var _iterator = stylesheetEntries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
         var entry = _step.value;
         var className = entry[0];
         var styles = entry[1];
-        var isMap = styles instanceof _map2["default"];
+        var isMap = styles instanceof Map;
         if (!isMap && (0, _utils.isEmpty)(styles)) continue;
 
         if (isMap) {
-          var _context4, _context5;
-
           var mediaQueryCSS = this.render(options, stylesheet.get(className));
-          mediaQueries += options.pretty ? (0, _concat["default"])(_context4 = "".concat(className, " {\n")).call(_context4, mediaQueryCSS, "}\n") : (0, _concat["default"])(_context5 = "".concat(className, "{")).call(_context5, mediaQueryCSS, "}");
+          mediaQueries += options.pretty ? "".concat(className, " {\n").concat(mediaQueryCSS, "}\n") : "".concat(className, "{").concat(mediaQueryCSS, "}");
           continue;
         }
 
         var markup = (0, _utils.createMarkup)(styles);
-        css += options.pretty ? (0, _concat["default"])(_context6 = ".".concat(className, " {\n")).call(_context6, markup.split(';').join(';\n'), "}\n") : (0, _concat["default"])(_context7 = ".".concat(className, "{")).call(_context7, markup, "}");
+        css += options.pretty ? ".".concat(className, " {\n").concat(markup.split(';').join(';\n'), "}\n") : ".".concat(className, "{").concat(markup, "}");
       }
     } catch (err) {
       _didIteratorError = true;
@@ -158,7 +125,7 @@ var _default = {
     stylesheet.clear();
     return !stylesheet.size;
   },
-  Map: _map2["default"],
+  Map: Map,
   __stylesheet: globalStylesheet
 };
 exports["default"] = _default;

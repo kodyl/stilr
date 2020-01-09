@@ -1,19 +1,12 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
-
-_Object$defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 exports.createMarkupForStyles = createMarkupForStyles;
 exports.setValueForStyles = setValueForStyles;
-
-var _indexOf = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/index-of"));
-
-var _slice = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/slice"));
 
 var _CSSProperty = require("./CSSProperty");
 
@@ -82,7 +75,7 @@ if (process.env.NODE_ENV !== 'production') {
     }
 
     warnedStyleNames[name] = true;
-    (0, _fbjs.warning)(false, 'Unsupported vendor-prefixed style property %s. Did you mean %s?%s', name, name.charAt(0).toUpperCase() + (0, _slice["default"])(name).call(name, 1), checkRenderMessage(owner));
+    (0, _fbjs.warning)(false, 'Unsupported vendor-prefixed style property %s. Did you mean %s?%s', name, name.charAt(0).toUpperCase() + name.slice(1), checkRenderMessage(owner));
   };
 
   var warnStyleValueWithSemicolon = function warnStyleValueWithSemicolon(name, value, owner) {
@@ -128,7 +121,7 @@ if (process.env.NODE_ENV !== 'production') {
       owner = component._currentElement._owner;
     }
 
-    if ((0, _indexOf["default"])(name).call(name, '-') > -1) {
+    if (name.indexOf('-') > -1) {
       warnHyphenatedStyleName(name, owner);
     } else if (badVendoredStyleNamePattern.test(name)) {
       warnBadVendoredStyleName(name, owner);

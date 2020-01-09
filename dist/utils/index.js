@@ -1,13 +1,10 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _Object$defineProperty = require("@babel/runtime-corejs3/core-js-stable/object/define-property");
-
-_Object$defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
 exports.sortObject = sortObject;
 exports.createHash = createHash;
 exports.stringifyObject = stringifyObject;
@@ -19,26 +16,12 @@ exports.isPseudo = isPseudo;
 exports.isMediaQuery = isMediaQuery;
 exports.seperateStyles = seperateStyles;
 
-var _typeof2 = _interopRequireDefault(require("@babel/runtime-corejs3/helpers/typeof"));
-
-var _parseInt2 = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/parse-int"));
-
-var _concat = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/concat"));
-
-var _isInteger = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/number/is-integer"));
-
-var _keys = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/object/keys"));
-
-var _sort = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/sort"));
-
-var _reduce = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/reduce"));
+var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _CSSPropertyOperations = require("./CSSPropertyOperations");
 
 function sortObject(obj) {
-  var _context, _context2;
-
-  return (0, _reduce["default"])(_context = (0, _sort["default"])(_context2 = (0, _keys["default"])(obj)).call(_context2)).call(_context, function (acc, key) {
+  return Object.keys(obj).sort().reduce(function (acc, key) {
     var val = obj[key];
     if (val || val === 0) acc[key] = val;
     return acc;
@@ -58,7 +41,7 @@ function createHash(str) {
 }
 
 function stringifyObject(obj) {
-  var keys = (0, _keys["default"])(obj);
+  var keys = Object.keys(obj);
   var str = '';
 
   for (var i = 0, len = keys.length; i < len; i++) {
@@ -71,17 +54,15 @@ function stringifyObject(obj) {
 var SYMBOL_SET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 function extendedToString(num, base) {
-  var _context3;
-
   var conversion = '';
-  if (base > SYMBOL_SET.length || base <= 1 || !(0, _isInteger["default"])(base)) throw new Error((0, _concat["default"])(_context3 = "".concat(base, " should be an integer between 1 and ")).call(_context3, SYMBOL_SET.length));
+  if (base > SYMBOL_SET.length || base <= 1 || !Number.isInteger(base)) throw new Error("".concat(base, " should be an integer between 1 and ").concat(SYMBOL_SET.length));
 
   while (num >= 1) {
     conversion = SYMBOL_SET[num - base * Math.floor(num / base)] + conversion;
     num = Math.floor(num / base);
   }
 
-  return base < 11 ? (0, _parseInt2["default"])(conversion) : conversion;
+  return base < 11 ? parseInt(conversion) : conversion;
 }
 
 function createClassName(obj) {
@@ -94,7 +75,7 @@ function createMarkup(obj) {
 }
 
 function isEmpty(obj) {
-  return !(0, _keys["default"])(obj).length;
+  return !Object.keys(obj).length;
 }
 
 function isPseudo(_ref) {
@@ -110,22 +91,18 @@ function isMediaQuery(_ref2) {
 }
 
 function handle(type, acc, _ref3) {
-  var _context4, _context5;
-
   var style = _ref3.style,
       rule = _ref3.rule;
   var pseudos = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
   var hash = createClassName(sortObject(style));
-  var rules = pseudos.length ? [(0, _concat["default"])(_context4 = []).call(_context4, rule, style, pseudos)] : rule;
-  acc[type] = (0, _concat["default"])(_context5 = acc[type]).call(_context5, rules);
+  var rules = pseudos.length ? [[].concat(rule, style, pseudos)] : rule;
+  acc[type] = acc[type].concat(rules);
   acc.style[rule] = hash;
   return acc;
 }
 
 function seperateStyles(styles) {
-  var _context6;
-
-  return (0, _reduce["default"])(_context6 = (0, _keys["default"])(styles)).call(_context6, function (acc, rule) {
+  return Object.keys(styles).reduce(function (acc, rule) {
     var content = {
       style: styles[rule],
       rule: rule
