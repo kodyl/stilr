@@ -1,6 +1,6 @@
 {
   "name": "stilr",
-  "version": "2.0.0-0",
+  "version": "2.0.0-1",
   "description": "Encapsulated styling for your javascript components with all the power of javascript and CSS combined. Usefull with React",
   "author": "Kodyl ApS",
   "contributors": [
